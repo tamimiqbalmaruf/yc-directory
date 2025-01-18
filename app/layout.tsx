@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { dbConnect } from "@/service/mongo";
 
 const workSans = localFont({
   src: [
@@ -58,11 +59,12 @@ export const metadata: Metadata = {
   description: "Pitch, Vote and Grow",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  await dbConnect()
   return (
     <html lang="en">
       <body
